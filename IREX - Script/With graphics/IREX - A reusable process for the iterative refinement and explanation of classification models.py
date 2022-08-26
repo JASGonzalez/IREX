@@ -196,7 +196,7 @@ def configParameters():
     parameters['regul_param_normal'] = 10.0 ** - np.arange(-2, 7)
     parameters['regul_param_alpha'] = 10.0 ** - np.arange(0, 7)
 
-    ## The alpha, ramdon state and learning rate init training parameters
+    ## The alpha, random state and learning rate init training parameters
     ## are defined for each iteration.
     parameters['learning_rate_init'] = 0.1
     parameters['random_state'] = 42
@@ -216,7 +216,7 @@ def configParameters():
     ##     2. Selection of multiple classes with OR type condition.
     ##     3. Selection of multiple classes with AND type condition.
     ##     4. Selection of multiple classes with AND type condition
-    ##        when they are inside the .
+    ##        when they are inside a certain range of values.
 
     ## The position of the class to qualify is defined.
     parameters['select_class_mode'] = 2 # *
@@ -240,10 +240,10 @@ def configParameters():
     ## 
     ##   The 4 numerical elements must meet the following conditions:
     ##
-    ##     Element 1. Rating is 1 and expected response is 0.
+    ##     Element 1. Score is 1 and expected response is 0.
     ##     Element 2. Score is 1 and expected response is 1.
-    ##     Element 3. Rating is 0 and expected response is 1.
-    ##     Element 4. Rating is 0 and expected response 0.
+    ##     Element 3. Score is 0 and expected response is 1.
+    ##     Element 4. Score is 0 and expected response 0.
 
     return parameters
 
@@ -512,12 +512,12 @@ def explain(data, model, config, expertKnowledge):
     print("Save model_depression.pkl")
     print()
 
-    ## Generation of the confusion matrix of the model.
+    ## Generating the confusion matrix of the model.
 
     ## We obtain the statistics of the final model to generate its
     ## confusion matrix.
 
-    ## The data for the generation of the confession matrix are defined.
+    ## The data for the generation of the confession matrix is defined.
     print("Generation of the confusion matrix.")
     confusion_matrix = ConfusionMatrixDisplay.from_estimator(mlp, X_test,
                        y_test, display_labels = config['target_names'],
@@ -559,7 +559,7 @@ def explain(data, model, config, expertKnowledge):
                        target_names = config['target_names'])
     proba_exp_lr = proba_ale_lr.explain(X_train.to_numpy())
 
-    # The graphs of all the data present in the dataset used are shown.
+    # The graphs of all the data present in the dataset used is shown.
     print("Generation of ALE graphs.")
     fig, ax = plt.subplots()
     plot_ale(proba_exp_lr, n_cols=2, features=list(range(df.shape[1]-1)),
